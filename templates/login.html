@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+
+    <head>
+        <title> Login </title>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="{{ url_for('static',filename = 'assets/css/main.css')}}" />
+    </head>
+<!-- Header -->
+    <header id="header" class="alt">
+        <div class="logo"><a href="index.html">Argus: <span>Which Senators Do You Align With?</span></a></div>
+        <a href="#menu">Menu</a>
+    </header>
+
+    <!-- Nav -->
+      <nav id="menu">
+        <ul class="links">
+          <li><a href="{{ url_for('index') }}">Home</a></li>
+          <li><a href="{{ url_for('values') }}">Values</a></li>
+          <li><a href="{{ url_for('signup') }}">Register</a></li>
+          <li><a href="{{ url_for('login') }}">Login</a></li>
+          <li><a href="{{ url_for('profile') }}">Profile</a></li>
+        </ul>
+      </nav>
+    <div id="main">
+         <section class="wrapper style1">
+            <div class="align-center" style="margin-left: 10%; margin-right: 10%;">
+                <div class = "row-uniform">
+                    <h3 align="center">Login Page</h3>
+                    <form method="POST" action="/login">
+                        <div class="field" style="padding-bottom: 25px;">
+                            <div class="control">
+                                <input class="input is-large" type="text" name="text" placeholder="Your Username" autofocus="">
+                            </div>
+                        </div>
+                        <div class="field">
+                            <div class="control"
+>                               <input class="input is-large" type="password" name="password" placeholder="Your Password" autofocus="">
+                            </div>
+                        </div>
+                    <li><a href="index.html" class="button fit">Submit</a></li>
+                    </form>
+                </div>
+            </div>
+        </section>
+
+        <footer id="footer">
+            <div class="copyright">
+            <ul class="icons">
+                <li><a href="#" class="icon fa-twitter"><span class="label">Twitter</span></a></li>
+                <li><a href="#" class="icon fa-facebook"><span class="label">Facebook</span></a></li>
+                <li><a href="#" class="icon fa-instagram"><span class="label">Instagram</span></a></li>
+                <li><a href="#" class="icon fa-snapchat"><span class="label">Snapchat</span></a></li>
+            </ul>
+            <p>&copy; ARGUS </p>
+            </div>
+        </footer>
+
+        <script src="assets/js/jquery.min.js"></script>
+        <script src="assets/js/jquery.scrolly.min.js"></script>
+        <script src="assets/js/jquery.scrollex.min.js"></script>
+        <script src="assets/js/skel.min.js"></script>
+        <script src="assets/js/util.js"></script>
+        <script src="assets/js/main.js"></script>
+
+    </body>
+</html>

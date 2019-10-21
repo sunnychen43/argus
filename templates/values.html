@@ -1,0 +1,96 @@
+<!DOCTYPE HTML>
+<html>
+  <head>
+    <title> - Argus - Values</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+      		<link rel="stylesheet" href="{{ url_for('static', filename='assets/css/main.css')}}" />
+            <script src="{{ url_for('static', filename='assets/js/jquery.min.js')}}"></script>
+      <script src="{{ url_for('static', filename='assets/js/jquery.scrolly.min.js')}}"></script>
+      <script src="{{ url_for('static', filename='assets/js/jquery.scrollex.min.js')}}"></script>
+      <script src="{{ url_for('static', filename='assets/js/skel.min.js')}}"></script>
+      <script src="{{ url_for('static', filename='assets/js/util.js')}}"></script>
+      <script src="{{ url_for('static', filename='assets/js/main.js')}}"></script>
+      
+      <script>
+            function submit() {
+                var arr = [];
+                for (var i=0; i < 9; i++) {
+                    arr.push($('input[name="interest'+i+'"]:checked').val());
+                }
+                var form = $('<form id="form" action="{{ url_for("bills") }}" method="post">' +
+                    '<input type="text" name="data" value="'+ arr.join() +'"/>' +
+                    '</form>');
+                $('body').append(form);
+                form.submit();
+            }
+      </script>
+  </head>
+  <body class="subpage">
+
+    <!-- Header -->
+      <header id="header">
+        <div class="logo"><a href="index.html">Argus <span>VALUES</span></a></div>
+        <a href="#menu">Menu</a>
+      </header>
+
+    <!-- Nav -->
+      <nav id="menu">
+        <ul class="links">
+          <li><a href="index.html">Home</a></li>
+          <li><a href="bills.html">Bills</a></li>
+          <li><a href="values.html">Values</a></li>
+          <li><a href="senator.html">Senators</a></li>
+          <li><a href="login.html">Login</a></li>
+        </ul>
+      </nav>
+
+    <!-- Main -->
+      <div id="main">
+        <section class="wrapper style1">
+          <div class="inner">
+
+            <header class="align-center">
+              <h1>Values</h1>
+              <p style="color:#707C80; font-size: 20px; padding-left: 15px">Tell Us Which Issues Matter Most.</p>
+            </header>
+
+            <!-- Topic of Interest -->
+              {% for i in range(0, len) %}
+              <h2 id="elements" style="margin-bottom: 20px; font-size: 35px;">{{ titles[i] }}</h2>
+              <p style="color:#707C80; font-size: 18px;">{{ descriptions[i] }}</p>
+              <div class="row 200%">
+                <div class="20u 12u$(medium)">
+                    <form id="{{ i }}">
+                        <input type="radio" name="interest{{ i }}" id="interest{{i}}1" value=1 >
+                        <label for="interest{{i}}1" style="color:#707C80; font-size: 18px;">1</label>
+                        <br>
+                        <input type="radio" name="interest{{ i }}" id="interest{{i}}2" value=2 >
+                        <label for="interest{{i}}2" style="color:#707C80; font-size: 18px;">2</label>
+                        
+                        <br>
+                        <input type="radio"  name="interest{{ i }}" id="interest{{i}}3" value=3 >
+                        <label for="interest{{i}}3" style="color:#707C80; font-size: 18px;">3</label>
+                        
+                        <br>
+                        <input type="radio" name="interest{{ i }}" id="interest{{i}}4" value=4 >
+                        <label for="interest{{i}}4" style="color:#707C80; font-size: 18px;">4</label>
+                        
+                        <br>
+                        <input type="radio" name="interest{{ i }}" id="interest{{i}}5" value=5 >
+                        <label for="interest{{i}}5" style="color:#707C80; font-size: 18px;">5</label>
+                        
+                    </form>
+                </div>
+              </div>
+              
+              {% endfor %}
+              
+              <button type="button" onclick="submit()">Submit</button>
+            </div>
+          </section>
+      </div>
+
+
+  </body>
+</html>

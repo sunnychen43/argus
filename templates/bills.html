@@ -1,0 +1,148 @@
+<!DOCTYPE HTML>
+<html>
+	<head>
+		<title> - Argus - Bills</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<link rel="stylesheet" href="{{ url_for('static', filename='assets/css/main.css')}}" />
+            <script src="{{ url_for('static', filename='assets/js/jquery.min.js')}}"></script>
+      <script src="{{ url_for('static', filename='assets/js/jquery.scrolly.min.js')}}"></script>
+      <script src="{{ url_for('static', filename='assets/js/jquery.scrollex.min.js')}}"></script>
+      <script src="{{ url_for('static', filename='assets/js/skel.min.js')}}"></script>
+      <script src="{{ url_for('static', filename='assets/js/util.js')}}"></script>
+      <script src="{{ url_for('static', filename='assets/js/main.js')}}"></script>
+        <script>
+//            function hideChoices(element) {
+//                var container = $(element).parent().parent();
+//                var res = $(element).text();
+//                var a = container.siblings("h5").eq(0);
+//                console.log(container.outerHeight(true))
+//                a.css("margin-bottom", container.outerHeight(true)-(27+5)-.4)
+//                a.text("Your answer: " + res);
+//                container.fadeOut(400,function() {
+//                    a.fadeIn(300);
+//                });
+//            }
+            var counter = 0;
+            var len = {{ len }};
+            var user_choices = [];
+            
+            function hideChoices(element) {
+                user_choices.push($(element).text());
+                
+                var container = $("#"+counter);
+                if (counter+1 < len) {
+                    var next_container = $("#"+(counter+1));
+                }
+                else {
+                    var next_container = $("#message");
+                }
+                
+                container.fadeOut(400,function() {
+                    next_container.fadeIn(450);
+                });
+                
+                if (counter+1 < len) {
+                    var curr_topic = $("#elements"+counter);
+                    var next_topic = $("#elements"+(counter+1));
+                    
+                    var curr_counter = $("#counter"+(counter%2+1));
+                    var next_counter = $("#counter"+(2-counter%2));
+                    counter += 1;
+                    next_counter.text(counter+1);
+                    curr_counter.fadeOut(400, function() {
+                        next_counter.fadeIn(450);
+                    });
+                    
+                    curr_topic.fadeOut(400, function() {
+                        if (next_topic.text() != 'None') {
+                            next_topic.fadeIn(450);
+                        }
+                    });
+                }
+                else {
+                    //redirect
+                    var form = $('<form id="form" action="{{ url_for("results") }}" method="post">' +
+                        '<input type="text" name="bill_ids" value="'+ {{ids}}.join() +'"/>' +
+                        '<input type="text" name="user_answers" value="'+ user_choices.join() +'"/>' +
+                        '</form>');
+                    $('body').append(form);
+                    form.submit();
+                }
+            }
+        </script>
+	</head>
+	<body class="subpage">
+
+		<!-- Header -->
+			<header id="header">
+				<div class="logo"><a href="index.html">Argus <span>BILLS</span></a></div>
+				<a href="#menu">Menu</a>
+			</header>
+
+		<!-- Nav -->
+      <nav id="menu">
+        <ul class="links">
+          <li><a href="{{ url_for('index') }}">Home</a></li>
+          <li><a href="{{ url_for('values') }}">Values</a></li>
+          <li><a href="{{ url_for('signup') }}">Register</a></li>
+          <li><a href="{{ url_for('login') }}">Login</a></li>
+          <li><a href="{{ url_for('profile') }}">Profile</a></li>
+        </ul>
+      </nav>
+
+		<!-- Main -->
+			<div id="main">
+				<section class="wrapper style1">
+					<div class="inner">
+
+						<header class="align-center">
+							<h1>Bills</h1>
+							<p style="color:#707C80;">Vote on real, impactful bills as if you were a member of the Senate.</p>
+						</header>
+
+						<!-- Topic of Interest -->
+                            <div style="height:125px;max-height:125px;display: inline-block;">
+							{% for i in range(0, len) %}
+                            {% if i==0 and topics[i] != 'None' %}
+                            <h2 id="elements{{i}}">{{ topics[i] }}</h2>
+                            {% else %}
+                            <h2 id="elements{{i}}" style="display: none;">{{ topics[i] }}</h2>
+                            {% endif %}
+                            {% endfor %}
+                            </div>
+                        
+                            <h4 style="color:#707C80;">Question <span id="counter1">1</span><span id="counter2" style="display: none;"></span> of {{ len }}</h4>
+                            {% for i in range(0, len) %}
+                            {% if i==0 %}
+							<div class="row 200%" id="{{ i }}">
+                            {% else %}
+                            <div class="row 200%" style="display: none;" id="{{ i }}">
+                            {% endif %}
+								<div class="20u 12u$(medium)">
+
+									<!-- Bills -->
+										<h3 style="margin-bottom: 10px">{{ names[i] }}</h3>
+										<p style="margin-bottom: 25px; font-size: 20px; color: #555F61">{{ descriptions[i] }}</p>
+										<ul class="actions">
+											<li><a onClick="hideChoices(this)" class="button special fit icon fa-check">Yea</a></li>
+											<li><a onClick="hideChoices(this)" class="button alt fit icon fa-close">Nay</a></li>
+											<li><a onClick="hideChoices(this)" class="button fit icon fa-circle-o">Not Voting</a></li>
+										</ul>
+                                        <h5 style="display: none; padding-top: 5px; font-size: 18px;"></h5>
+
+                                </div>
+                            </div>
+                            {% endfor %}
+                            <h3 id="message" style="display: none;">redirect</h3>
+                        </div>
+                        <div class="inner" id="spacer" style="height: 400px"></div>
+                    </div>
+                    
+                </section>
+                
+        </div>
+                                    
+
+	</body>
+</html>

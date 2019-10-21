@@ -1,0 +1,72 @@
+<!DOCTYPE HTML>
+<html>
+	<head>
+		<title> - Argus - Senators</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<link rel="stylesheet" href="{{ url_for('static', filename='assets/css/main.css')}}" />
+            <script src="{{ url_for('static', filename='assets/js/jquery.min.js')}}"></script>
+      <script src="{{ url_for('static', filename='assets/js/jquery.scrolly.min.js')}}"></script>
+      <script src="{{ url_for('static', filename='assets/js/jquery.scrollex.min.js')}}"></script>
+      <script src="{{ url_for('static', filename='assets/js/skel.min.js')}}"></script>
+      <script src="{{ url_for('static', filename='assets/js/util.js')}}"></script>
+      <script src="{{ url_for('static', filename='assets/js/main.js')}}"></script>
+		<script>
+			function myFunction() {
+	  			var x = document.getElementById("category").value;
+		  		if (x == 1) {
+		  		document.getElementById("demo").innerHTML = "Bob Menendez has served a senior Senator for NJ since 2006. He aggresively advocates for immigration reform, and is heavily involved in agricultural, enviornmental, and educational issues. He also opposes Trump on in healthcare and mantains a strong presence and voice on foreign issues, speaking out against totalitarian regimes and human right abuses abroad."; }
+				if (x == 2) {
+				document.getElementById("demo").innerHTML = "Cory Booker has served as junior Senator for NJ since 2013. He campaigned strongly to improve urban living conditions, increase affordable housing, and decrease deficits. As a Presidental candadite, he is notable for an extremely liberal voting record, strong support for social freedoms including womens rights, LGBTQ rights, and affirmative action."; }
+			}
+		</script>
+	</head>
+	<body class="subpage">
+
+		<!-- Header -->
+			<header id="header">
+				<div class="logo"><a href="index.html">Argus <span>SENATORS</span></a></div>
+				<a href="#menu">Menu</a>
+			</header>
+
+		<!-- Nav -->
+			<nav id="menu">
+				<ul class="links">
+					<li><a href="index.html">Home</a></li>
+					<li><a href="bills.html">Bills</a></li>
+					<li><a href="values.html">Values</a></li>
+					<li><a href="senator.html">Senators</a></li>
+					<li><a href="senator.html">Register</a></li>
+					<li><a href="login.html">Login</a></li>
+					<li><a href="senator.html">Profile</a></li>
+				</ul>
+			</nav>
+
+		<!-- Main -->
+			<div id="main">
+				<section class="wrapper style1">
+					<div class="inner">
+
+						<header class="align-center">
+							<h1>Senators</h1>
+							<p>View detailed analysis of voting patterns, policy stances, and how closely a Senator aligns with your votes </p>
+						</header>
+							<div class="row 200%" style="text-align: center; padding-left: 515px">
+								<div class="20u 16u$(medium)">
+									<div class="select-wrapper" style="padding-bottom: 20px">
+										<select name="category" id="category" >
+											<option value="">- Category -</option>
+											<option value=1>"Bob Menendez"</option>
+											<option value=2>"Cory Booker"</option>
+										</select>
+										<br>
+										<input type="submit" value="Submit" onClick="myFunction()">
+									</div>
+								</div>
+							</div>
+						</div>
+					</section>
+				</div>
+
+	</body>
+</html>

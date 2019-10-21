@@ -1,0 +1,122 @@
+<!DOCTYPE HTML>
+<html>
+  <head>
+    <title> - Argus - Results </title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+            <link rel="stylesheet" href="{{ url_for('static', filename='assets/css/main.css')}}" />
+            <script src="{{ url_for('static', filename='assets/js/jquery.min.js')}}"></script>
+      <script src="{{ url_for('static', filename='assets/js/jquery.scrolly.min.js')}}"></script>
+      <script src="{{ url_for('static', filename='assets/js/jquery.scrollex.min.js')}}"></script>
+      <script src="{{ url_for('static', filename='assets/js/skel.min.js')}}"></script>
+      <script src="{{ url_for('static', filename='assets/js/util.js')}}"></script>
+      <script src="{{ url_for('static', filename='assets/js/main.js')}}"></script>
+      <script>
+          $(document).ready(function() {
+              var container = $("#main > section > div > div.table-wrapper > table > tbody");
+              var e = container.find("td:contains('Booker')");
+              var score = e.siblings().eq(0).text();
+              
+              var booker = $("#main > section > div > div.row > div:nth-child(1) > div > div.card-footer");
+              booker.text("Similarity Percentage: "+score);
+              
+              var bob = $("#main > section > div > div.row > div:nth-child(2) > div > div.card-footer");
+              var e = container.find("td:contains('Menendez')");
+              var score = e.siblings().eq(0).text();
+              bob.text("Similarity Percentage: "+score);
+              
+          });
+      </script>
+    </head>
+	<body class="subpage">
+
+		<!-- Header -->
+			<header id="header">
+				<div class="logo"><a href="index.html">Argus <span>Results</span></a></div>
+				<a href="#menu">Menu</a>
+			</header>
+
+		<!-- Nav -->
+      <nav id="menu">
+        <ul class="links">
+          <li><a href="{{ url_for('index') }}">Home</a></li>
+          <li><a href="{{ url_for('values') }}">Values</a></li>
+          <li><a href="{{ url_for('signup') }}">Register</a></li>
+          <li><a href="{{ url_for('login') }}">Login</a></li>
+          <li><a href="{{ url_for('profile') }}">Profile</a></li>
+        </ul>
+      </nav>
+
+		<!-- Main -->
+			<div id="main">
+				<section class="wrapper style1">
+					<div class="inner">
+
+						<header class="align-center">
+							<h1>Results</h1>
+							<p>View which members of the Senate you match with most</p>
+						</header>
+
+						<!-- Topic of Interest -->
+							<h2 id="elements">Your State Senators</h2>
+							<div class="row">
+								<div class = col-sm-6> 
+
+									<!-- Bills -->
+
+									<div class = "card">
+										<div class="card-header">Cory Booker: Democrat from New Jersey</div>
+  										<div class="card-body"><img src= "{{ url_for('static', filename='assets/images/corybooker.jpg')}}" alt="Responsive Image" class="img-thumbnail"> </div>
+  										<div class="card-footer"> Similarity Coefficient: ___ <a href="senators.html" class="btn btn-info" role="button">Find Out More</a></div>
+
+									</div>
+								</div>
+								<div class = col-sm-6>
+									<div class = "card">
+									<div class="card-header">Bob Menendez: Democrat from New Jersey</div>
+  										<div class="card-body"><img src= "{{ url_for('static', filename='assets/images/bobmenendez.jpg')}}" alt="Responsive Image" class="img-thumbnail"> </div>
+  										<div class="card-footer"> Similarity Coefficient: ___ <a href="senators.html" class="btn btn-info" role="button">Find Out More</a></div>
+									</div>
+
+								</div>
+							</div>
+							<h3>Default</h3>
+                            <div class="table-wrapper">
+                                <table>
+                                    <thead>
+                                        <tr>
+                                            <th>Senator</th>
+                                            <th>Similarity Coefficient</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                            {% for i in range(0,len) %}
+                                            <tr>
+                                                <td>
+                                                    <h4> {{ keys[i] }} </h4>
+                                                </td>
+                                                <td>
+                                                    <h4> {{ values[i] }} </h4>
+                                                </td>
+                                            </tr>
+                                            {% endfor %}
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+   						</section>
+            <footer id="footer">
+                <div class="copyright">
+                    <ul class="icons">
+                        <li><a href="#" class="icon fa-twitter"><span class="label">Twitter</span></a></li>
+                        <li><a href="#" class="icon fa-facebook"><span class="label">Facebook</span></a></li>
+                        <li><a href="#" class="icon fa-instagram"><span class="label">Instagram</span></a></li>
+                        <li><a href="#" class="icon fa-snapchat"><span class="label">Snapchat</span></a></li>
+                    </ul>
+                    <p>&copy; Untitled. All rights reserved. Design: <a href="https://templated.co">TEMPLATED</a>. Images: <a href="https://unsplash.com">Unsplash</a>.</p>
+                </div>
+            </footer>
+
+        </div>
+	</body>
+</html>
