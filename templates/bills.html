@@ -62,7 +62,7 @@
                 }
                 else {
                     //redirect
-                    var form = $('<form id="form" action="{{ url_for("results") }}" method="post">' +
+                    var form = $('<form id="form" action="{{ url_for("app.results") }}" method="post">' +
                         '<input type="text" name="bill_ids" value="'+ {{ids}}.join() +'"/>' +
                         '<input type="text" name="user_answers" value="'+ user_choices.join() +'"/>' +
                         '</form>');
@@ -83,11 +83,12 @@
 		<!-- Nav -->
       <nav id="menu">
         <ul class="links">
-          <li><a href="{{ url_for('index') }}">Home</a></li>
-          <li><a href="{{ url_for('values') }}">Values</a></li>
-          <li><a href="{{ url_for('signup') }}">Register</a></li>
-          <li><a href="{{ url_for('login') }}">Login</a></li>
-          <li><a href="{{ url_for('profile') }}">Profile</a></li>
+          <li><a href="{{ url_for('app.index') }}">Home</a></li>
+          <li><a href="{{ url_for('app.bills') }}">Bills</a></li>
+          <li><a href="{{ url_for('app.values') }}">Values</a></li>
+          <li><a href="{{ url_for('app.senators') }}">Senators</a></li>
+          <li><a href="{{ url_for('app.signup') }}">Register</a></li>
+          <li><a href="{{ url_for('app.login') }}">Login</a></li>
         </ul>
       </nav>
 
