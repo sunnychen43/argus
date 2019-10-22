@@ -28,10 +28,11 @@
       <nav id="menu">
         <ul class="links">
           <li class="active"><a href="#">Home</a></li>
-          <li><a href="{{ url_for('values') }}">Values</a></li>
-          <li><a href="{{ url_for('signup') }}">Register</a></li>
-          <li><a href="{{ url_for('login') }}">Login</a></li>
-          <li><a href="{{ url_for('profile') }}">Profile</a></li>
+          <li><a href="{{ url_for('app.bills') }}">Bills</a></li>
+          <li><a href="{{ url_for('app.values') }}">Values</a></li>
+          <li><a href="{{ url_for('app.senators') }}">Senators</a></li>
+          <li><a href="{{ url_for('app.signup') }}">Register</a></li>
+          <li><a href="{{ url_for('app.login') }}">Login</a></li>
         </ul>
       </nav>
 
@@ -42,7 +43,7 @@
             <h1>Welcome to ARGUS</h1>
             <p>Find your Senator today! Scroll down for information on some trending senators </p>
           </header>
-          <a href="{{ url_for('values') }}" class="button big scrolly">Take The Quiz</a>
+          <a href="{{ url_for('app.values') }}" class="button big scrolly">Take The Quiz</a>
         </div>
       </section>
 
@@ -67,7 +68,7 @@
 
                     <p>Booker has also emerged as a national leader in the Congressional push for common sense criminal justice reform, advocating for front-end sentencing reforms, pushing for the banning of juvenile solitary confinement in federal facilities, and spearheading legislation to make the hiring process fairer for the formerly incarcerated. Booker has also partnered with colleagues on both sides of the aisle to create a number of economic proposals, from increased small business investment to apprenticeship programs, with the hope of fostering greater economic mobility and opportunity for individual Americans. </p>
 
-                    <a href="{{ url_for('values') }}" class="button">Learn More</a>
+                    <a href="{{ url_for('app.values') }}" class="button">Learn More</a>
                   </div>
                 </div>
             </div>
@@ -82,11 +83,11 @@
                   <p>Kentucky Senator</p>>
                   <p>Mitch McConnell is the Senate Majority Leader. Elected to that position unanimously by his Republican colleagues first in 2014 and again in 2016 and 2018, he is only the second Kentuckian to ever serve as Majority Leader in the U.S. Senate. The first, Senator Alben Barkley, led the Democrats from 1937 to 1949.</p>
                   <p>Senator McConnell has served, again by the unanimous vote of his colleagues, as the Republican Leader since the 110th Congress. He is the longest-serving Senate Republican Leader in the history of the United States. McConnell previously served in leadership as the Majority Whip in the 108th and 109th Congresses and as chairman of the National Republican Senatorial Committee during the 1998 and 2000 election cycles.</p>
-                  <a href="{{ url_for('values') }}" class="button">Learn More</a>
+                  <a href="{{ url_for('app.values') }}" class="button">Learn More</a>
                 </div>
                 <div class="col col1 first">
                   <div class="image round fit">
-                    <a href="values.html" class="link"><img src="{{ url_for('static', filename='assets/images/mitch-mcconnell.jpg')}}" alt = "Responsive Image" class = "img-thumbnail" ></a>
+                    <a href="{{ url_for('app.values') }}" class="link"><img src="{{ url_for('static', filename='assets/images/mitch-mcconnell.jpg')}}" alt = "Responsive Image" class = "img-thumbnail" ></a>
                   </div>
                 </div>
               </div>
@@ -105,7 +106,7 @@
                     <img src="{{ url_for('static', filename='assets/images/Bernie-Sanders-2007.jpg')}}" alt = "Responsive Image" class = "img-thumbnail" >
                   </div>
                   <p>Bernie Sanders - Vermont Senator </p>
-                  <a href="values.html" class="button">Learn More</a>
+                  <a href="{{ url_for('app.values') }}" class="button">Learn More</a>
                 </div>
                 <div class="col align-center">
                   <div class="image round fit">
@@ -119,7 +120,7 @@
                     <img src="{{ url_for('static', filename='assets/images/Ted-Cruz.jpg')}}" alt = "Responsive Image" class = "img-thumbnail" >
                   </div>
                   <p>Ted Cruz - Texas Senator </p>
-                  <a href="values.html" class="button">Learn More</a>
+                  <a href="{{ url_for('app.values') }}" class="button">Learn More</a>
                 </div>
               </div>
             </div>

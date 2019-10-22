@@ -18,7 +18,7 @@
                 for (var i=0; i < 9; i++) {
                     arr.push($('input[name="interest'+i+'"]:checked').val());
                 }
-                var form = $('<form id="form" action="{{ url_for("bills") }}" method="post">' +
+                var form = $('<form id="form" action="{{ url_for("app.bills") }}" method="post">' +
                     '<input type="text" name="data" value="'+ arr.join() +'"/>' +
                     '</form>');
                 $('body').append(form);
@@ -30,18 +30,19 @@
 
     <!-- Header -->
       <header id="header">
-        <div class="logo"><a href="index.html">Argus <span>VALUES</span></a></div>
+        <div class="logo"><a href="{{ url_for('app.index') }}">Argus <span>VALUES</span></a></div>
         <a href="#menu">Menu</a>
       </header>
 
     <!-- Nav -->
       <nav id="menu">
         <ul class="links">
-          <li><a href="index.html">Home</a></li>
-          <li><a href="bills.html">Bills</a></li>
-          <li><a href="values.html">Values</a></li>
-          <li><a href="senator.html">Senators</a></li>
-          <li><a href="login.html">Login</a></li>
+          <li><a href="{{ url_for('app.index') }}">Home</a></li>
+          <li><a href="{{ url_for('app.bills') }}">Bills</a></li>
+          <li><a href="{{ url_for('app.values') }}">Values</a></li>
+          <li><a href="{{ url_for('app.senators') }}">Senators</a></li>
+          <li><a href="{{ url_for('app.signup') }}">Register</a></li>
+          <li><a href="{{ url_for('app.login') }}">Login</a></li>
         </ul>
       </nav>
 

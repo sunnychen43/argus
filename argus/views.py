@@ -1,60 +1,24 @@
-from flask import Flask, render_template, redirect, url_for, request, flash
-from flask_bootstrap import Bootstrap
+from flask import render_template, redirect, url_for, request, flash, Blueprint
 from werkzeug.security import generate_password_hash, check_password_hash
-from flask_login import LoginManager, login_user, login_required, logout_user, current_user
-from sqlalchemy import MetaData, create_engine
-from sqlalchemy.orm import mapper, create_session
+from flask_login import login_user, login_required, logout_user, current_user
 from models import User, Vote
 from defs import descriptions, topics
 from forms import LoginForm, RegisterForm
-import operator
-import interface
-import flask
-import os
+from server import login_manager, load_user, session, user_query, vote_query
+import operator, interface
 
 
-# FLASK INIT
-app = Flask(__name__)
-app.config['SECRET_KEY'] = os.urandom(12);
-
-
-
-# LOGIN INIT
-login_manager = LoginManager()
-login_manager.init_app(app)
-login_manager.login_view = 'login'
-
-@login_manager.user_loader
-def load_user(user_id):
-    return user_query.get(int(user_id))
-
-
-
-# BOOTSTRAP INIT
-bootstrap = Bootstrap(app)
-
-
-
-# SQLALCHEMY INIT
-user_db = create_engine("sqlite:///database.db")
-metadata = MetaData(bind = user_db)
-metadata.create_all()
-session = create_session(bind=user_db, autocommit=False, autoflush=True)
-user_query = session.query(User)
-vote_query = session.query(Vote)
-
-
-
+blueprint = Blueprint("app", __name__)
 
 # VIEWS
-@app.route('/index.html')
-@app.route('/')
+@blueprint.route('/index.html')
+@blueprint.route('/')
 def index():
     print(interface.get_rand_bill_ids(vote_query, None, 10))
     return render_template('index.html')
 
 
-@app.route('/login', methods=['GET', 'POST'])
+@blueprint.route('/login', methods=['GET', 'POST'])
 def login():
     form = LoginForm()
 
@@ -71,7 +35,7 @@ def login():
     return render_template('login.html', form=form)
 
 
-@app.route('/signup', methods=['GET', 'POST'])
+@blueprint.route('/signup', methods=['GET', 'POST'])
 def signup():
     form = RegisterForm(request.form)
 
@@ -93,13 +57,13 @@ def signup():
     return render_template('signup.html', form=form)
 
 
-@app.route('/dashboard')
+@blueprint.route('/dashboard')
 @login_required
 def dashboard():
     return render_template('dashboard.html', name=current_user.username)
 
 
-@app.route('/profile', methods = ['POST', 'GET'])
+@blueprint.route('/profile', methods = ['POST', 'GET'])
 @login_required
 def profile():
     if request.method == 'POST':
@@ -107,13 +71,13 @@ def profile():
         return render_template("profile.html", result = result)
 
 
-@app.route('/logout')
+@blueprint.route('/logout')
 @login_required
 def logout():
     logout_user()
     return redirect(url_for('index'))
 
-@app.route('/bills', methods = ['POST', 'GET'])
+@blueprint.route('/bills', methods = ['POST', 'GET'])
 def bills():
     MIN_QUESTIONS = 5
 
@@ -145,16 +109,16 @@ def bills():
 
     return render_template("bills.html", len=len(ids), names=names, descriptions=descriptions, topics = topics_arr, ids=ids)
 
-@app.route('/values')
+@blueprint.route('/values')
 def values():
 
     return render_template("values.html", len=9 ,titles=topics, descriptions=descriptions)
 
-@app.route('/senators')
+@blueprint.route('/senators')
 def senators():
     return render_template("senators.html")
 
-@app.route('/results', methods = ['POST', 'GET'])
+@blueprint.route('/results', methods = ['POST', 'GET'])
 def results():
 
     # array of bill ids (integers)
@@ -191,14 +155,3 @@ def results():
         values.append(value)
 
     return render_template('results.html', keys = keys, values = values, len = len(keys))
-
-if __name__ == '__main__':
-    app.run(host='0.0.0.0')
-
-    
-    
-    
-    
-    
-    
-    
